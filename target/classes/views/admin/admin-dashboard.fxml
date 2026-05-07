@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esports.controllers.admin.AdminDashboardController"
+            prefWidth="1100" prefHeight="650">
+
+    <left>
+        <VBox styleClass="sidebar" prefWidth="220">
+            <Label text="⚡ Esports Admin" styleClass="sidebar-title"/>
+
+            <Button text="🎮  Games"    onAction="#showGames"    maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <!-- Change this line in your FXML -->
+            <Button text="💬  Forum" onAction="#showForom" maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="📖  Guides"   onAction="#showGuides"   maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="🪜  Steps"    onAction="#showSteps"    maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="⭐  Ratings"  onAction="#showRatings"  maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="📊  Stats"    onAction="#showStats"    maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="🛍️  Products" onAction="#showProducts" maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="📦  Orders" onAction="#showOrders"     maxWidth="Infinity" styleClass="sidebar-btn"/>
+
+            <Separator/>
+            <Button text="🛒  Shop" onAction="#showShop" maxWidth="Infinity" styleClass="sidebar-btn"/>
+
+            <Separator/>
+
+            <Button fx:id="darkModeBtn" text="🌙  Dark Mode" onAction="#toggleDarkMode"
+                    maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="👤  User View" onAction="#showUserView"
+                    maxWidth="Infinity" styleClass="sidebar-btn"/>
+        </VBox>
+    </left>
+
+    <center>
+        <AnchorPane fx:id="contentArea"/>
+    </center>
+
+</BorderPane>

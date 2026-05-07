@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" style="-fx-padding: 25;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.GuideFormController">
+
+    <Label fx:id="formTitle" text="Add Guide"
+           style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="12">
+        <Label text="Title:"       GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="titleField" promptText="Guide title" prefWidth="300"
+                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextArea fx:id="descField" promptText="Description" prefWidth="300" prefHeight="80"
+                  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Difficulty:"  GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <HBox spacing="8" GridPane.rowIndex="2" GridPane.columnIndex="1">
+            <ComboBox fx:id="difficultyBox" prefWidth="150"/>
+            <Button text="🤖 Predict" onAction="#handlePredictDifficulty"
+                    style="-fx-background-color: #9b59b6; -fx-text-fill: white;"/>
+        </HBox>
+
+        <Label text="Cover Image:"  GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <HBox spacing="8" GridPane.rowIndex="4" GridPane.columnIndex="1">
+            <TextField fx:id="coverField" promptText="image.jpg" prefWidth="230"/>
+            <Button text="Browse..." onAction="#handleBrowse"/>
+        </HBox>
+
+        <Label text="Game:"        GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="gameBox" prefWidth="300"
+                  GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+
+    </GridPane>
+
+
+
+    <HBox spacing="10">
+        <Button text="Save"   onAction="#handleSave"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+        <Button text="Delete" fx:id="deleteBtn" onAction="#handleDelete"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+
+</VBox>

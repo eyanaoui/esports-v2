@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.user.GuideDetailController">
+
+    <!-- GUIDE HEADER -->
+    <Label fx:id="guideTitleLabel"
+           style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+    <Label fx:id="guideDescLabel"
+           style="-fx-font-size: 13; -fx-text-fill: #666;"
+           wrapText="true"/>
+    <HBox spacing="10">
+        <Label fx:id="difficultyLabel"
+               style="-fx-font-size: 12; -fx-padding: 2 8 2 8; -fx-background-radius: 99;"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- STEPS -->
+    <Label text="Steps" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+    <ScrollPane fitToWidth="true" prefHeight="200">
+        <VBox fx:id="stepsContainer" spacing="10" style="-fx-padding: 5;"/>
+    </ScrollPane>
+
+    <Separator/>
+
+    <!-- RATINGS -->
+    <Label text="Ratings" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+    <ScrollPane fitToWidth="true" prefHeight="150">
+        <VBox fx:id="ratingsContainer" spacing="8" style="-fx-padding: 5;"/>
+    </ScrollPane>
+
+    <Separator/>
+
+    <!-- ADD RATING -->
+    <Label text="Leave a Rating" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Rating:"/>
+        <ComboBox fx:id="ratingBox" prefWidth="100"/>
+        <Label text="Comment:"/>
+        <TextField fx:id="commentField" promptText="Write a comment..." prefWidth="250"/>
+        <Button text="Submit" onAction="#handleSubmitRating"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+    </HBox>
+
+</VBox>

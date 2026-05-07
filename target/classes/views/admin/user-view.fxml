@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.UserController">
+
+    <Label text="User Management" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Search users by name or email..." prefWidth="300"
+                   onKeyReleased="#handleSearch"/>
+        <Button text="+ Add User" onAction="#handleAdd"/>
+    </HBox>
+
+    <TableView fx:id="userTable" prefHeight="450">
+        <columns>
+            <TableColumn fx:id="colFirstName" text="First Name" prefWidth="150"/>
+            <TableColumn fx:id="colLastName"  text="Last Name"  prefWidth="150"/>
+            <TableColumn fx:id="colEmail"     text="Email"      prefWidth="250"/>
+            <TableColumn fx:id="colRole"      text="Role"       prefWidth="120"/>
+            <TableColumn fx:id="colCreatedAt" text="Created At" prefWidth="180"/>
+        </columns>
+    </TableView>
+
+</VBox>

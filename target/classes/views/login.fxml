@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.esports.controllers.LoginController"
+           style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+
+    <!-- Main Container with ScrollPane -->
+    <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER">
+        <VBox alignment="CENTER" spacing="0" maxWidth="450" minHeight="700" style="-fx-padding: 40 0;">
+        
+        <!-- Login Card -->
+        <VBox fx:id="loginCard" alignment="CENTER" spacing="25" 
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 30, 0, 0, 10); -fx-padding: 50 40 40 40;">
+            
+            <!-- Fullscreen Button (Top Right Corner of Card) -->
+            <HBox alignment="TOP_RIGHT" style="-fx-padding: 0 0 0 0;">
+                <Button fx:id="fullscreenButton" text="⛶" onAction="#handleToggleFullscreen"
+                        style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 50; -fx-padding: 8 12; -fx-cursor: hand; -fx-min-width: 40; -fx-min-height: 40;"/>
+            </HBox>
+            
+            <!-- Logo/Title Section -->
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="⚡" style="-fx-font-size: 48;"/>
+                <Label text="Esports Platform" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                <Label fx:id="subtitleLabel" text="Welcome back! Please login to continue" 
+                       style="-fx-font-size: 13; -fx-text-fill: #888;"/>
+            </VBox>
+
+            <!-- Form Fields -->
+            <VBox spacing="20" prefWidth="350">
+                
+                <!-- Email Field -->
+                <VBox spacing="8">
+                    <Label text="Email Address" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <TextField fx:id="emailField" promptText="Enter your email" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Password Field -->
+                <VBox spacing="8">
+                    <Label text="Password" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter your password" 
+                                   style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Remember Me & Forgot Password -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <CheckBox fx:id="rememberMeCheckbox" text="Remember me" 
+                              style="-fx-font-size: 13; -fx-text-fill: #666;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Hyperlink fx:id="forgotPasswordLink" text="Forgot password?" onAction="#handleForgotPassword"
+                               style="-fx-font-size: 13; -fx-text-fill: #667eea; -fx-border-color: transparent;"/>
+                </HBox>
+
+                <!-- CAPTCHA -->
+                <VBox spacing="8">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label fx:id="captchaQuestionLabel" text="5 + 3 = ?" 
+                               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #667eea; -fx-background-color: #f0f4ff; -fx-padding: 10 15; -fx-background-radius: 8;"/>
+                        <Button fx:id="refreshCaptchaButton" text="🔄" onAction="#handleRefreshCaptcha"
+                                style="-fx-background-color: #f0f0f0; -fx-text-fill: #333; -fx-font-size: 14; -fx-cursor: hand; -fx-background-radius: 8; -fx-padding: 8 12;">
+                            <tooltip>
+                                <Tooltip text="Refresh CAPTCHA"/>
+                            </tooltip>
+                        </Button>
+                    </HBox>
+                    <TextField fx:id="captchaAnswerField" promptText="Enter answer" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Error Label -->
+                <Label fx:id="errorLabel" wrapText="true" visible="false" 
+                       style="-fx-text-fill: #e74c3c; -fx-font-size: 13; -fx-padding: 10; -fx-background-color: #ffe6e6; -fx-background-radius: 8;"/>
+
+                <!-- Login and Create Account Buttons Side by Side -->
+                <HBox spacing="15" alignment="CENTER">
+                    <!-- Login Button -->
+                    <Button fx:id="loginButton" text="Login" onAction="#handleLogin" 
+                            style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-padding: 14 0; -fx-background-radius: 10; -fx-cursor: hand;"
+                            prefWidth="165">
+                        <effect>
+                            <javafx.scene.effect.DropShadow color="rgba(102, 126, 234, 0.4)" radius="10" offsetY="5"/>
+                        </effect>
+                    </Button>
+
+                    <!-- Create Account Button -->
+                    <Button fx:id="signupButton" text="Create Account" onAction="#handleShowSignup" 
+                            style="-fx-background-color: transparent; -fx-border-color: #667eea; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-text-fill: #667eea; -fx-font-size: 15; -fx-font-weight: bold; -fx-padding: 14 0; -fx-cursor: hand;"
+                            prefWidth="165"/>
+                </HBox>
+
+                <!-- Divider -->
+                <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10 0;">
+                    <javafx.scene.shape.Line startX="0" endX="140" stroke="#e0e0e0" strokeWidth="1"/>
+                    <Label text="OR" style="-fx-font-size: 12; -fx-text-fill: #888;"/>
+                    <javafx.scene.shape.Line startX="0" endX="140" stroke="#e0e0e0" strokeWidth="1"/>
+                </HBox>
+
+                <!-- Sign in with Google Button -->
+                <Button fx:id="googleSignInButton" text="🔐 Sign in with Google" onAction="#handleGoogleSignIn" 
+                        style="-fx-background-color: white; -fx-border-color: #dadce0; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-text-fill: #3c4043; -fx-font-size: 14; -fx-font-weight: 500; -fx-padding: 12 0; -fx-cursor: hand;"
+                        prefWidth="350">
+                    <effect>
+                        <javafx.scene.effect.DropShadow color="rgba(0, 0, 0, 0.1)" radius="5" offsetY="2"/>
+                    </effect>
+                </Button>
+                
+                <!-- Sign in with Signature Button -->
+                <Button fx:id="signatureLoginButton" text="✍️ Sign in with Signature" onAction="#handleShowSignatureLogin" 
+                        style="-fx-background-color: white; -fx-border-color: #dadce0; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-text-fill: #3c4043; -fx-font-size: 14; -fx-font-weight: 500; -fx-padding: 12 0; -fx-cursor: hand;"
+                        prefWidth="350">
+                    <effect>
+                        <javafx.scene.effect.DropShadow color="rgba(0, 0, 0, 0.1)" radius="5" offsetY="2"/>
+                    </effect>
+                </Button>
+            </VBox>
+
+        </VBox>
+
+        <!-- Signup Card (Initially Hidden) -->
+        <VBox fx:id="signupCard" alignment="CENTER" spacing="20" visible="false" managed="false"
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 30, 0, 0, 10); -fx-padding: 40 40 40 40;">
+            
+            <!-- Fullscreen Button (Top Right Corner of Signup Card) -->
+            <HBox alignment="TOP_RIGHT" style="-fx-padding: 0 0 0 0;">
+                <Button text="⛶" onAction="#handleToggleFullscreen"
+                        style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 50; -fx-padding: 8 12; -fx-cursor: hand; -fx-min-width: 40; -fx-min-height: 40;"/>
+            </HBox>
+            
+            <!-- Signup Title -->
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="✨" style="-fx-font-size: 48;"/>
+                <Label text="Create Account" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                <Label text="Join the Esports community today!" 
+                       style="-fx-font-size: 13; -fx-text-fill: #888;"/>
+            </VBox>
+
+            <!-- Signup Form -->
+            <VBox spacing="15" prefWidth="350">
+                
+                <!-- First Name -->
+                <VBox spacing="6">
+                    <Label text="First Name *" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <TextField fx:id="firstNameField" promptText="Enter your first name (2-50 characters)" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Last Name -->
+                <VBox spacing="6">
+                    <Label text="Last Name *" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <TextField fx:id="lastNameField" promptText="Enter your last name (2-50 characters)" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Email -->
+                <VBox spacing="6">
+                    <Label text="Email Address *" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <TextField fx:id="signupEmailField" promptText="example@domain.com" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Password -->
+                <VBox spacing="6">
+                    <Label text="Password *" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <PasswordField fx:id="signupPasswordField" promptText="Min 4 characters, no spaces" 
+                                       style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"
+                                       HBox.hgrow="ALWAYS"/>
+                        <Button fx:id="generatePasswordButton" text="🤖 Generate" onAction="#handleGeneratePassword" 
+                                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 12 15; -fx-background-radius: 10; -fx-cursor: hand;"
+                                prefWidth="110"/>
+                    </HBox>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label fx:id="passwordStrengthLabel" text="" visible="false"
+                               style="-fx-font-size: 11; -fx-font-weight: bold;"/>
+                        <Button fx:id="showPasswordButton" text="Show" onAction="#handleTogglePasswordVisibility" visible="false"
+                                style="-fx-background-color: transparent; -fx-text-fill: #667eea; -fx-font-size: 11; -fx-cursor: hand; -fx-underline: false;"
+                                prefWidth="60"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Signature Canvas -->
+                <VBox spacing="8" alignment="CENTER">
+                    <Label text="Draw Your Signature *" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <HBox fx:id="signupSignatureCanvasContainer" alignment="CENTER" 
+                          style="-fx-border-color: #e0e0e0; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;"/>
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button fx:id="clearSignupSignatureButton" text="Clear Signature" onAction="#handleClearSignupSignature" 
+                                style="-fx-background-color: #f0f0f0; -fx-text-fill: #333; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 8 0; -fx-background-radius: 10; -fx-cursor: hand;"
+                                prefWidth="170"/>
+                        <Button fx:id="uploadSignupSignatureButton" text="📁 Upload Signature" onAction="#handleUploadSignupSignature" 
+                                style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-size: 12; -fx-font-weight: bold; -fx-padding: 8 0; -fx-background-radius: 10; -fx-cursor: hand;"
+                                prefWidth="170"/>
+                    </HBox>
+                    <Label fx:id="signupSignatureFileLabel" text="" visible="false"
+                           style="-fx-font-size: 11; -fx-text-fill: #27ae60; -fx-font-style: italic;"/>
+                </VBox>
+
+                <!-- CAPTCHA -->
+                <VBox spacing="8">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label fx:id="signupCaptchaQuestionLabel" text="5 + 3 = ?" 
+                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #667eea; -fx-background-color: #f0f4ff; -fx-padding: 10 15; -fx-background-radius: 8;"/>
+                        <Button fx:id="refreshSignupCaptchaButton" text="🔄" onAction="#handleRefreshSignupCaptcha"
+                                style="-fx-background-color: #f0f0f0; -fx-text-fill: #333; -fx-font-size: 13; -fx-cursor: hand; -fx-background-radius: 8; -fx-padding: 8 12;">
+                            <tooltip>
+                                <Tooltip text="Refresh CAPTCHA"/>
+                            </tooltip>
+                        </Button>
+                    </HBox>
+                    <TextField fx:id="signupCaptchaAnswerField" promptText="Enter answer" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Error Label -->
+                <Label fx:id="signupErrorLabel" wrapText="true" visible="false" 
+                       style="-fx-text-fill: #e74c3c; -fx-font-size: 12; -fx-padding: 8; -fx-background-color: #ffe6e6; -fx-background-radius: 8;"/>
+
+                <!-- Success Label -->
+                <Label fx:id="signupSuccessLabel" wrapText="true" visible="false" 
+                       style="-fx-text-fill: #27ae60; -fx-font-size: 12; -fx-padding: 8; -fx-background-color: #e6ffe6; -fx-background-radius: 8;"/>
+
+                <!-- Create Account Button -->
+                <Button fx:id="createAccountButton" text="Create Account" onAction="#handleSignup" 
+                        style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 12 0; -fx-background-radius: 10; -fx-cursor: hand;"
+                        prefWidth="350">
+                    <effect>
+                        <javafx.scene.effect.DropShadow color="rgba(102, 126, 234, 0.4)" radius="10" offsetY="5"/>
+                    </effect>
+                </Button>
+
+                <!-- Back to Login Button -->
+                <Button fx:id="backToLoginButton" text="← Back to Login" onAction="#handleShowLogin" 
+                        style="-fx-background-color: transparent; -fx-text-fill: #667eea; -fx-font-size: 13; -fx-cursor: hand; -fx-underline: false;"
+                        prefWidth="350"/>
+            </VBox>
+
+        </VBox>
+        
+        <!-- Signature Login Card (Initially Hidden) -->
+        <VBox fx:id="signatureCard" alignment="CENTER" spacing="20" visible="false" managed="false"
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 30, 0, 0, 10); -fx-padding: 40 40 40 40;">
+            
+            <!-- Fullscreen Button (Top Right Corner) -->
+            <HBox alignment="TOP_RIGHT" style="-fx-padding: 0 0 0 0;">
+                <Button text="⛶" onAction="#handleToggleFullscreen"
+                        style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 50; -fx-padding: 8 12; -fx-cursor: hand; -fx-min-width: 40; -fx-min-height: 40;"/>
+            </HBox>
+            
+            <!-- Signature Title -->
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="✍️" style="-fx-font-size: 48;"/>
+                <Label text="Signature Login" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+                <Label fx:id="signatureInfoLabel" text="Draw your signature to login" 
+                       style="-fx-font-size: 13; -fx-text-fill: #888;"/>
+            </VBox>
+
+            <!-- Signature Form -->
+            <VBox spacing="20" prefWidth="450">
+                
+                <!-- Email Field -->
+                <VBox spacing="8">
+                    <Label text="Email Address" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <TextField fx:id="signatureEmailField" promptText="Enter your email" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Signature Canvas -->
+                <VBox spacing="8" alignment="CENTER">
+                    <Label text="Draw Your Signature" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                    <HBox fx:id="signatureCanvasContainer" alignment="CENTER" 
+                          style="-fx-border-color: #e0e0e0; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;"/>
+                </VBox>
+
+                <!-- Canvas Action Buttons -->
+                <HBox spacing="15" alignment="CENTER">
+                    <Button fx:id="clearSignatureButton" text="Clear" onAction="#handleClearSignature" 
+                            style="-fx-background-color: #f0f0f0; -fx-text-fill: #333; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 12 0; -fx-background-radius: 10; -fx-cursor: hand;"
+                            prefWidth="215"/>
+                    <Button fx:id="submitSignatureButton" text="Submit" onAction="#handleSignatureLogin" 
+                            style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 12 0; -fx-background-radius: 10; -fx-cursor: hand;"
+                            prefWidth="215">
+                        <effect>
+                            <javafx.scene.effect.DropShadow color="rgba(102, 126, 234, 0.4)" radius="10" offsetY="5"/>
+                        </effect>
+                    </Button>
+                </HBox>
+
+                <!-- CAPTCHA -->
+                <VBox spacing="8">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label fx:id="signatureCaptchaQuestionLabel" text="5 + 3 = ?" 
+                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #667eea; -fx-background-color: #f0f4ff; -fx-padding: 10 15; -fx-background-radius: 8;"/>
+                        <Button fx:id="refreshSignatureCaptchaButton" text="🔄" onAction="#handleRefreshSignatureCaptcha"
+                                style="-fx-background-color: #f0f0f0; -fx-text-fill: #333; -fx-font-size: 13; -fx-cursor: hand; -fx-background-radius: 8; -fx-padding: 8 12;">
+                            <tooltip>
+                                <Tooltip text="Refresh CAPTCHA"/>
+                            </tooltip>
+                        </Button>
+                    </HBox>
+                    <TextField fx:id="signatureCaptchaAnswerField" promptText="Enter answer" 
+                               style="-fx-background-color: #f7f7f7; -fx-border-color: #e0e0e0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12 15; -fx-font-size: 14;"/>
+                </VBox>
+
+                <!-- Error Label -->
+                <Label fx:id="signatureErrorLabel" wrapText="true" visible="false" 
+                       style="-fx-text-fill: #e74c3c; -fx-font-size: 13; -fx-padding: 10; -fx-background-color: #ffe6e6; -fx-background-radius: 8;"/>
+
+                <!-- Divider -->
+                <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10 0;">
+                    <javafx.scene.shape.Line startX="0" endX="180" stroke="#e0e0e0" strokeWidth="1"/>
+                    <Label text="OR" style="-fx-font-size: 12; -fx-text-fill: #888;"/>
+                    <javafx.scene.shape.Line startX="0" endX="180" stroke="#e0e0e0" strokeWidth="1"/>
+                </HBox>
+
+                <!-- Use Password Instead Button -->
+                <Button fx:id="usePasswordButton" text="← Use Password Instead" onAction="#handleUsePasswordInstead" 
+                        style="-fx-background-color: transparent; -fx-text-fill: #667eea; -fx-font-size: 14; -fx-cursor: hand; -fx-underline: false;"
+                        prefWidth="450"/>
+
+                <!-- Back to Login Button -->
+                <Button fx:id="backFromSignatureButton" text="← Back to Login" onAction="#handleShowLogin" 
+                        style="-fx-background-color: transparent; -fx-text-fill: #667eea; -fx-font-size: 14; -fx-cursor: hand; -fx-underline: false;"
+                        prefWidth="450"/>
+            </VBox>
+
+        </VBox>
+
+        </VBox>
+    </ScrollPane>
+
+</StackPane>

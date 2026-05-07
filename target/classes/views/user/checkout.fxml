@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esports.controllers.user.CheckoutController"
+            prefWidth="1280"
+            prefHeight="760"
+            style="-fx-background-color: linear-gradient(to bottom right, #070914, #111827, #171b34);">
+
+    <top>
+        <VBox spacing="16" style="-fx-padding: 22 28 18 28;">
+
+            <HBox spacing="14"
+                  alignment="CENTER_LEFT"
+                  style="-fx-background-color: linear-gradient(to right, #15172f, #25105c, #0f172a);
+                         -fx-background-radius: 24;
+                         -fx-padding: 22;
+                         -fx-border-color: rgba(147, 51, 234, 0.45);
+                         -fx-border-radius: 24;
+                         -fx-effect: dropshadow(gaussian, rgba(99,91,255,0.30), 24, 0, 0, 8);">
+
+                <Button text="← Back to Shop"
+                        onAction="#handleBackToShop"
+                        style="-fx-background-color: rgba(255,255,255,0.10);
+                               -fx-border-color: rgba(255,255,255,0.15);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 14;
+                               -fx-border-radius: 14;
+                               -fx-padding: 10 16;
+                               -fx-cursor: hand;"/>
+
+                <VBox spacing="4">
+                    <Label text="Secure Checkout"
+                           style="-fx-font-size: 30;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: white;"/>
+
+                    <Label text="Review your loadout, check ML recommendations, then confirm your order."
+                           style="-fx-text-fill: #c7d2fe;
+                                  -fx-font-size: 13;"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <VBox spacing="8" alignment="CENTER_RIGHT">
+                    <Label fx:id="itemCountLabel"
+                           text="0 items"
+                           style="-fx-background-color: rgba(255,255,255,0.10);
+                                  -fx-text-fill: white;
+                                  -fx-background-radius: 999;
+                                  -fx-padding: 8 16;
+                                  -fx-font-weight: bold;"/>
+
+                    <Label text="ML CHECKOUT"
+                           style="-fx-background-color: rgba(139,92,246,0.20);
+                                  -fx-text-fill: #c4b5fd;
+                                  -fx-background-radius: 999;
+                                  -fx-padding: 6 12;
+                                  -fx-font-size: 11;
+                                  -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    pannable="true"
+                    hbarPolicy="NEVER"
+                    vbarPolicy="AS_NEEDED"
+                    style="-fx-background: transparent;
+                           -fx-background-color: transparent;
+                           -fx-border-color: transparent;">
+
+            <content>
+                <HBox spacing="24" style="-fx-padding: 0 28 28 28;">
+
+                    <VBox spacing="18"
+                          HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: rgba(255,255,255,0.05);
+                                 -fx-background-radius: 24;
+                                 -fx-padding: 22;
+                                 -fx-border-color: rgba(255,255,255,0.08);
+                                 -fx-border-radius: 24;">
+
+                        <HBox alignment="CENTER_LEFT">
+                            <VBox spacing="4">
+                                <Label text="🎮 Your Loadout"
+                                       style="-fx-font-size: 24;
+                                              -fx-font-weight: bold;
+                                              -fx-text-fill: white;"/>
+
+                                <Label text="Products selected for your gaming setup."
+                                       style="-fx-text-fill: #94a3b8;
+                                              -fx-font-size: 13;"/>
+                            </VBox>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <Label text="ORDER SUMMARY"
+                                   style="-fx-background-color: rgba(99,102,241,0.22);
+                                          -fx-text-fill: #c7d2fe;
+                                          -fx-background-radius: 999;
+                                          -fx-padding: 7 14;
+                                          -fx-font-size: 11;
+                                          -fx-font-weight: bold;"/>
+                        </HBox>
+
+                        <ListView fx:id="checkoutCartListView"
+                                  prefHeight="295"
+                                  style="-fx-background-color: transparent;
+                                         -fx-control-inner-background: transparent;
+                                         -fx-background-insets: 0;
+                                         -fx-padding: 4;
+                                         -fx-border-color: transparent;"/>
+
+                        <HBox spacing="10">
+                            <Button text="Remove Selected"
+                                    onAction="#handleRemoveSelected"
+                                    style="-fx-background-color: #ef4444;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 16;
+                                           -fx-cursor: hand;"/>
+
+                            <Button text="Clear Cart"
+                                    onAction="#handleClearCart"
+                                    style="-fx-background-color: #1f2937;
+                                           -fx-text-fill: #e5e7eb;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 16;
+                                           -fx-cursor: hand;"/>
+                        </HBox>
+
+                        <VBox spacing="12"
+                              style="-fx-background-color: rgba(139,92,246,0.10);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;
+                                     -fx-border-color: rgba(139,92,246,0.26);
+                                     -fx-border-radius: 20;">
+
+                            <HBox alignment="CENTER_LEFT">
+                                <VBox spacing="4">
+                                    <Label text="🤖 Recommended for your order"
+                                           style="-fx-text-fill: white;
+                                                  -fx-font-size: 19;
+                                                  -fx-font-weight: bold;"/>
+
+                                    <Label text="Based on the products currently in your cart. Each card shows the ML score."
+                                           style="-fx-text-fill: #c4b5fd;
+                                                  -fx-font-size: 12;"/>
+                                </VBox>
+                            </HBox>
+
+                            <ScrollPane fitToHeight="true"
+                                        fitToWidth="true"
+                                        prefHeight="230"
+                                        hbarPolicy="NEVER"
+                                        vbarPolicy="AS_NEEDED"
+                                        style="-fx-background: transparent;
+                                               -fx-background-color: transparent;
+                                               -fx-border-color: transparent;">
+                                <content>
+                                    <FlowPane fx:id="recommendationsContainer"
+                                              hgap="12"
+                                              vgap="12"
+                                              style="-fx-padding: 4;"/>
+                                </content>
+                            </ScrollPane>
+                        </VBox>
+
+                        <HBox spacing="18"
+                              style="-fx-background-color: rgba(34,197,94,0.10);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;
+                                     -fx-border-color: rgba(34,197,94,0.22);
+                                     -fx-border-radius: 20;">
+
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Subtotal"
+                                       style="-fx-text-fill: #86efac;
+                                              -fx-font-size: 12;
+                                              -fx-font-weight: bold;"/>
+                                <Label fx:id="subtotalLabel"
+                                       text="0.00 TND"
+                                       style="-fx-text-fill: white;
+                                              -fx-font-size: 22;
+                                              -fx-font-weight: bold;"/>
+                            </VBox>
+
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Items"
+                                       style="-fx-text-fill: #86efac;
+                                              -fx-font-size: 12;
+                                              -fx-font-weight: bold;"/>
+                                <Label fx:id="itemsSummaryLabel"
+                                       text="0"
+                                       style="-fx-text-fill: white;
+                                              -fx-font-size: 22;
+                                              -fx-font-weight: bold;"/>
+                            </VBox>
+
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Total"
+                                       style="-fx-text-fill: #86efac;
+                                              -fx-font-size: 12;
+                                              -fx-font-weight: bold;"/>
+                                <Label fx:id="checkoutTotalLabel"
+                                       text="0.00 TND"
+                                       style="-fx-text-fill: white;
+                                              -fx-font-size: 24;
+                                              -fx-font-weight: bold;"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <VBox spacing="16"
+                          prefWidth="430"
+                          style="-fx-background-color: rgba(255,255,255,0.05);
+                                 -fx-background-radius: 24;
+                                 -fx-padding: 22;
+                                 -fx-border-color: rgba(255,255,255,0.08);
+                                 -fx-border-radius: 24;">
+
+                        <VBox spacing="4">
+                            <Label text="👤 Player Information"
+                                   style="-fx-font-size: 24;
+                                          -fx-font-weight: bold;
+                                          -fx-text-fill: white;"/>
+
+                            <Label text="Enter customer details before placing the order."
+                                   style="-fx-text-fill: #94a3b8;
+                                          -fx-font-size: 13;"/>
+                        </VBox>
+
+                        <VBox spacing="3">
+                            <TextField fx:id="firstNameField"
+                                       promptText="First name"
+                                       style="-fx-background-color: #07132d;
+                                              -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #7f8aa3;
+                                              -fx-background-radius: 16;
+                                              -fx-border-color: #1e40af;
+                                              -fx-border-radius: 16;
+                                              -fx-padding: 12 14;"/>
+                            <Label fx:id="firstNameError" style="-fx-text-fill: #ff6b81; -fx-font-size: 11;"/>
+                        </VBox>
+
+                        <VBox spacing="3">
+                            <TextField fx:id="lastNameField"
+                                       promptText="Last name"
+                                       style="-fx-background-color: #07132d;
+                                              -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #7f8aa3;
+                                              -fx-background-radius: 16;
+                                              -fx-border-color: #1e40af;
+                                              -fx-border-radius: 16;
+                                              -fx-padding: 12 14;"/>
+                            <Label fx:id="lastNameError" style="-fx-text-fill: #ff6b81; -fx-font-size: 11;"/>
+                        </VBox>
+
+                        <VBox spacing="3">
+                            <TextField fx:id="emailField"
+                                       promptText="Email"
+                                       style="-fx-background-color: #07132d;
+                                              -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #7f8aa3;
+                                              -fx-background-radius: 16;
+                                              -fx-border-color: #1e40af;
+                                              -fx-border-radius: 16;
+                                              -fx-padding: 12 14;"/>
+                            <Label fx:id="emailError" style="-fx-text-fill: #ff6b81; -fx-font-size: 11;"/>
+                        </VBox>
+
+                        <VBox spacing="3">
+                            <TextField fx:id="phoneField"
+                                       promptText="Phone"
+                                       style="-fx-background-color: #07132d;
+                                              -fx-text-fill: white;
+                                              -fx-prompt-text-fill: #7f8aa3;
+                                              -fx-background-radius: 16;
+                                              -fx-border-color: #1e40af;
+                                              -fx-border-radius: 16;
+                                              -fx-padding: 12 14;"/>
+                            <Label fx:id="phoneError" style="-fx-text-fill: #ff6b81; -fx-font-size: 11;"/>
+                        </VBox>
+
+                        <Separator style="-fx-background-color: #334155;"/>
+
+                        <Label text="Payment Method"
+                               style="-fx-font-size: 17;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: white;"/>
+
+                        <VBox spacing="3">
+                            <ComboBox fx:id="paymentMethodBox"
+                                      promptText="Choose Cash, Card or PayPal"
+                                      prefWidth="290"
+                                      style="-fx-background-color: #07132d;
+                                             -fx-background-radius: 16;
+                                             -fx-border-color: #1e40af;
+                                             -fx-border-radius: 16;"/>
+                            <Label fx:id="paymentError" style="-fx-text-fill: #ff6b81; -fx-font-size: 11;"/>
+                        </VBox>
+
+                        <Label fx:id="messageLabel"
+                               wrapText="true"
+                               style="-fx-text-fill: #a7f3d0;
+                                      -fx-font-size: 12;
+                                      -fx-font-weight: bold;"/>
+
+                        <Button text="Place Order"
+                                onAction="#handlePlaceOrder"
+                                maxWidth="Infinity"
+                                style="-fx-background-color: linear-gradient(to right, #22c55e, #16a34a);
+                                       -fx-text-fill: white;
+                                       -fx-font-weight: bold;
+                                       -fx-font-size: 15;
+                                       -fx-background-radius: 16;
+                                       -fx-padding: 14;
+                                       -fx-cursor: hand;"/>
+
+                        <VBox spacing="10"
+                              style="-fx-background-color: rgba(99,102,241,0.10);
+                                     -fx-background-radius: 18;
+                                     -fx-padding: 16;
+                                     -fx-border-color: rgba(99,102,241,0.22);
+                                     -fx-border-radius: 18;">
+
+                            <Label text="💳 Online Payment"
+                                   style="-fx-font-size: 16;
+                                          -fx-font-weight: bold;
+                                          -fx-text-fill: #c7d2fe;"/>
+
+                            <Button text="Pay Online"
+                                    onAction="#handlePayOnline"
+                                    maxWidth="Infinity"
+                                    style="-fx-background-color: linear-gradient(to right, #8b5cf6, #6366f1);
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 14;
+                                           -fx-padding: 12;
+                                           -fx-cursor: hand;"/>
+
+                            <Button fx:id="confirmOnlinePaymentButton"
+                                    text="Confirm Payment"
+                                    onAction="#handleConfirmOnlinePayment"
+                                    maxWidth="Infinity"
+                                    style="-fx-background-color: #111827;
+                                           -fx-border-color: #475569;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 14;
+                                           -fx-border-radius: 14;
+                                           -fx-padding: 12;
+                                           -fx-cursor: hand;"/>
+
+                            <Label text="If you choose Card or PayPal, complete the online payment first, then confirm here."
+                                   wrapText="true"
+                                   style="-fx-text-fill: #94a3b8;
+                                          -fx-font-size: 12;"/>
+                        </VBox>
+                    </VBox>
+
+                </HBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

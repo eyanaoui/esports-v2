@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.GuideController">
+
+    <Label text="Guide Management" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Search guides..." prefWidth="300"
+                   onKeyReleased="#handleSearch"/>
+        <Button text="+ Add Guide" onAction="#handleAdd"/>
+    </HBox>
+
+    <TableView fx:id="guideTable" prefHeight="450">
+        <columns>
+            <TableColumn fx:id="colId"         text="ID"          prefWidth="50"/>
+            <TableColumn fx:id="colTitle"      text="Title"       prefWidth="200"/>
+            <TableColumn fx:id="colDesc"       text="Description" prefWidth="250"/>
+            <TableColumn fx:id="colDifficulty" text="Difficulty"  prefWidth="100"/>
+            <TableColumn fx:id="colGameId"     text="Game"        prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</VBox>

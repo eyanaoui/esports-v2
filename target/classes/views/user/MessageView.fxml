@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.esports.controllers.user.MessageController"
+           prefWidth="640" prefHeight="560"
+           styleClass="forum-msg-root"
+           stylesheets="@../../forum-messages.css">
+
+    <VBox spacing="0" styleClass="forum-msg-bg" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="20" right="22" bottom="20" left="22"/>
+        </padding>
+
+        <VBox styleClass="forum-msg-header" spacing="4">
+            <Label fx:id="sujetTitreLabel" styleClass="forum-msg-header-title" wrapText="true"/>
+            <Label text="Discussion — replies appear below" styleClass="forum-msg-header-sub"/>
+            <Label fx:id="sujetStatusLabel" styleClass="forum-msg-header-sub"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button text="Generate Summary" onAction="#handleGenerateSummary" styleClass="forum-msg-cancel"/>
+                <Button text="Export PDF" onAction="#handleExportPdf" styleClass="forum-msg-send"/>
+            </HBox>
+            <Label fx:id="summaryLabel" wrapText="true" styleClass="forum-msg-header-sub"/>
+            <Label text="Sujets similaires" styleClass="forum-msg-header-sub"/>
+            <ListView fx:id="similarTopicsListView" prefHeight="90"/>
+        </VBox>
+
+        <Region prefHeight="14"/>
+
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    styleClass="forum-msg-scroll" VBox.vgrow="ALWAYS">
+            <VBox fx:id="messagesContainer" styleClass="forum-msg-list"/>
+        </ScrollPane>
+        <HBox spacing="8" alignment="CENTER_RIGHT" style="-fx-padding: 6 0 0 0;">
+            <Label fx:id="pageLabel" text="Page 1" styleClass="forum-msg-header-sub"/>
+            <Button fx:id="loadMoreButton" text="Load More" onAction="#handleLoadMore" styleClass="forum-msg-cancel"/>
+        </HBox>
+
+        <Region prefHeight="14"/>
+
+        <VBox styleClass="forum-msg-composer" spacing="10">
+            <Label fx:id="composerHintLabel" text="Your reply" styleClass="forum-msg-composer-hint"/>
+            <VBox fx:id="editingPreviewBox" spacing="6" visible="false" managed="false" styleClass="forum-msg-edit-preview">
+                <Label text="Original message (reference while you edit):" styleClass="forum-msg-edit-preview-title"/>
+                <Label fx:id="editingOriginalLabel" wrapText="true" styleClass="forum-msg-edit-original"/>
+            </VBox>
+            <TextArea fx:id="messageField" wrapText="true" promptText="Réponse (3–2000 car., au moins une lettre, pas de chiffre en tête)"
+                      prefRowCount="4" minHeight="88" prefHeight="110" styleClass="forum-msg-input"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button text="Attach File" onAction="#handleAttachFile" styleClass="forum-msg-cancel"/>
+                <Label fx:id="attachmentNameLabel" text="No file selected" styleClass="forum-msg-header-sub"/>
+            </HBox>
+            <Label fx:id="messageErrorLabel" styleClass="forum-msg-error-label" visible="false" managed="false"/>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="cancelEditButton" text="Cancel edit" onAction="#handleCancelEdit"
+                        styleClass="forum-msg-cancel" visible="false" managed="false"/>
+                <Button fx:id="sendButton" text="Post reply" onAction="#handleSend" styleClass="forum-msg-send"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</StackPane>

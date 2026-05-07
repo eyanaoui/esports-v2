@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox spacing="15" style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.StatsController">
+
+    <Label text="Stats Dashboard" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+
+    <!-- METRIC CARDS -->
+    <HBox spacing="15">
+        <VBox style="-fx-background-color: #3498db; -fx-padding: 15; -fx-background-radius: 8;" prefWidth="180">
+            <Label text="Total Games" style="-fx-text-fill: white; -fx-font-size: 12;"/>
+            <Label fx:id="totalGamesLabel" text="0" style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+        <VBox style="-fx-background-color: #2ecc71; -fx-padding: 15; -fx-background-radius: 8;" prefWidth="180">
+            <Label text="Total Guides" style="-fx-text-fill: white; -fx-font-size: 12;"/>
+            <Label fx:id="totalGuidesLabel" text="0" style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+        <VBox style="-fx-background-color: #e74c3c; -fx-padding: 15; -fx-background-radius: 8;" prefWidth="180">
+            <Label text="Total Ratings" style="-fx-text-fill: white; -fx-font-size: 12;"/>
+            <Label fx:id="totalRatingsLabel" text="0" style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+        <VBox style="-fx-background-color: #f39c12; -fx-padding: 15; -fx-background-radius: 8;" prefWidth="180">
+            <Label text="Avg Rating" style="-fx-text-fill: white; -fx-font-size: 12;"/>
+            <Label fx:id="avgRatingLabel" text="0.0" style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+    </HBox>
+
+    <!-- CHARTS -->
+    <HBox spacing="15">
+        <!-- Bar Chart -->
+        <BarChart fx:id="guidesPerGameChart" prefWidth="450" prefHeight="300">
+            <xAxis><CategoryAxis label="Game"/></xAxis>
+            <yAxis><NumberAxis label="Guides"/></yAxis>
+        </BarChart>
+
+        <!-- Pie Chart -->
+        <PieChart fx:id="difficultyChart" prefWidth="300" prefHeight="300"
+                  title="Difficulty Distribution"/>
+    </HBox>
+
+    <!-- LEADERBOARD -->
+    <Label text="Top Rated Guides" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+    <TableView fx:id="leaderboardTable" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colRank"    text="#"           prefWidth="50"/>
+            <TableColumn fx:id="colTitle"   text="Guide"       prefWidth="250"/>
+            <TableColumn fx:id="colGame"    text="Game"        prefWidth="150"/>
+            <TableColumn fx:id="colAvgRating" text="Avg Rating" prefWidth="100"/>
+            <TableColumn fx:id="colTotal"   text="Total Ratings" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</VBox>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.esports.controllers.admin.AdminForumController"
+            styleClass="admin-root"
+            stylesheets="@../../forum-admin.css">
+    <top>
+        <VBox spacing="12" style="-fx-padding: 16;">
+            <Label text="Forum Admin Dashboard" styleClass="dashboard-title"/>
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Search topics/messages..." prefWidth="280"/>
+                <ComboBox fx:id="messageStatusFilterCombo" prefWidth="130"/>
+                <ComboBox fx:id="topicStatusFilterCombo" prefWidth="130"/>
+                <Button text="Refresh" onAction="#handleRefresh" styleClass="action-button"/>
+                <Button text="Export Report PDF" onAction="#handleExportReportPdf" styleClass="action-button"/>
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Button text="🔔" onAction="#handleShowAdminNotifications" styleClass="notif-button"/>
+                    <Label fx:id="notifCountLabel" text="0" styleClass="notif-badge"/>
+                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Topics:"/>
+                <Label fx:id="totalTopicsLabel" text="0"/>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
+            <content>
+                <VBox fx:id="topicsContainer" spacing="10" style="-fx-padding: 14;"/>
+            </content>
+        </ScrollPane>
+    </center>
+    <right>
+        <VBox spacing="10" styleClass="right-panel" prefWidth="300">
+            <VBox styleClass="stats-card">
+                <Label text="Most replied"/>
+                <Label fx:id="mostRepliedLabel" text="-"/>
+            </VBox>
+            <VBox styleClass="stats-card">
+                <Label text="Today messages"/>
+                <Label fx:id="todayMessagesLabel" text="0"/>
+            </VBox>
+            <VBox styleClass="stats-card">
+                <Label text="Pending / Rejected / HOT"/>
+                <Label fx:id="pendingMessagesLabel" text="0"/>
+                <Label fx:id="rejectedMessagesLabel" text="0"/>
+                <Label fx:id="hotTopicsLabel" text="0"/>
+            </VBox>
+            <Label text="Top 5 Trending Topics"/>
+            <ListView fx:id="topTrendingList" prefHeight="110"/>
+            <Label text="Top Forum Users"/>
+            <ListView fx:id="topUsersList" prefHeight="110"/>
+            <Label text="Reports Pending"/>
+            <ListView fx:id="pendingReportsList" prefHeight="110"/>
+            <Label text="Recent Activity"/>
+            <ListView fx:id="activityListView" prefHeight="120"/>
+            <Label text="Messages by Status"/>
+            <PieChart fx:id="statusPieChart" labelsVisible="true" legendVisible="true" prefHeight="180"/>
+        </VBox>
+    </right>
+</BorderPane>
