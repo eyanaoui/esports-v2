@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -14,51 +13,64 @@ import java.net.URL;
 
 public class UserDashboardController {
 
-    @FXML private AnchorPane contentArea;
-    @FXML private Button darkModeBtn;
+    @FXML
+    private AnchorPane contentArea;
+
+    private String currentView = "/views/user/game-browse.fxml";
 
     @FXML
     public void initialize() {
-        updateDarkModeButton();
         showGames();
     }
 
     @FXML
-    private void showGames() {loadView("/views/user/game-browse.fxml");}
-
+    private void showGames() {
+        currentView = "/views/user/game-browse.fxml";
+        loadView(currentView);
+    }
 
     @FXML
     private void showShop() {
-        loadView("/views/user/shop-browse.fxml");
+        currentView = "/views/user/shop-browse.fxml";
+        loadView(currentView);
     }
 
     @FXML
     private void showCheckout() {
-        loadView("/views/user/checkout.fxml");
+        currentView = "/views/user/checkout.fxml";
+        loadView(currentView);
     }
 
     @FXML
     private void showForum() {
-        loadView("/views/user/ForumView.fxml");
+        currentView = "/views/user/ForumView.fxml";
+        loadView(currentView);
     }
 
     @FXML
     private void showMessages() {
-        loadView("/views/user/MessageView.fxml");
+        currentView = "/views/user/MessageView.fxml";
+        loadView(currentView);
     }
 
     @FXML
     private void showSettings() {
-        loadView("/views/user/user-settings.fxml");
+        currentView = "/views/user/user-settings.fxml";
+        loadView(currentView);
     }
-
 
     @FXML
     private void handleLogout() {
         try {
             AppState.clearSession();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            URL loginUrl = getClass().getResource("/views/login.fxml");
+            if (loginUrl == null) {
+                System.out.println("FXML not found: /views/login.fxml");
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(loginUrl);
             Scene scene = new Scene(loader.load());
 
             URL cssUrl = getClass().getResource("/styles.css");
@@ -68,17 +80,24 @@ public class UserDashboardController {
 
             Stage stage = (Stage) contentArea.getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Esports Login");
+            stage.setTitle("Esports Platform");
             stage.setMaximized(true);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error during logout: " + e.getMessage());
         }
     }
 
     private void loadView(String fxmlPath) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            URL resource = getClass().getResource(fxmlPath);
+
+            if (resource == null) {
+                System.out.println("FXML not found: " + fxmlPath);
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
             Parent view = loader.load();
 
             contentArea.getChildren().clear();
@@ -90,13 +109,7 @@ public class UserDashboardController {
             AnchorPane.setLeftAnchor(view, 0.0);
 
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void updateDarkModeButton() {
-        if (darkModeBtn != null) {
-            darkModeBtn.setText(AppState.isDarkMode() ? "☀️  Light Mode" : "🌙  Dark Mode");
+            System.out.println("Error loading view " + fxmlPath + ": " + e.getMessage());
         }
     }
 }

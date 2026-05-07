@@ -1,63 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.esports.controllers.user.UserDashboardController"
-            prefWidth="1100"
-            prefHeight="650">
+            prefWidth="1280"
+            prefHeight="760"
+            styleClass="user-dashboard-root">
 
-    <left>
-        <VBox styleClass="sidebar" prefWidth="220" spacing="8">
+    <!-- TOP BAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT"
+              spacing="20"
+              styleClass="user-topbar"
+              prefHeight="90">
 
-            <Label text="🎮 Esports User" styleClass="sidebar-title"/>
+            <padding>
+                <Insets top="14" right="28" bottom="14" left="28"/>
+            </padding>
 
-            <Button text="🎮  Games"
-                    onAction="#showGames"
-                    maxWidth="Infinity"
-                    styleClass="sidebar-btn"/>
+            <HBox alignment="CENTER_LEFT" spacing="14">
+                <StackPane styleClass="user-logo-box">
+                    <Label text="ES" styleClass="user-logo-text"/>
+                </StackPane>
 
+                <VBox spacing="2">
+                    <Label text="ESPORTS ARENA" styleClass="user-brand-title"/>
+                    <Label text="Gaming • Guides • Shop • Community" styleClass="user-brand-subtitle"/>
+                </VBox>
+            </HBox>
 
-            <Button text="🛍️  Shop"
-                    onAction="#showShop"
-                    maxWidth="Infinity"
-                    styleClass="sidebar-btn"/>
+            <Region HBox.hgrow="ALWAYS"/>
 
-            <Button text="🛒  Checkout"
-                    onAction="#showCheckout"
-                    maxWidth="Infinity"
-                    styleClass="sidebar-btn"/>
+            <Button text="Dashboard" onAction="#showGames" styleClass="user-nav-btn"/>
+            <Button text="Games" onAction="#showGames" styleClass="user-nav-btn"/>
+            <Button text="Shop" onAction="#showShop" styleClass="user-nav-btn"/>
+            <Button text="Checkout" onAction="#showCheckout" styleClass="user-nav-btn"/>
+            <Button text="Forum" onAction="#showForum" styleClass="user-nav-btn"/>
+            <Button text="Messages" onAction="#showMessages" styleClass="user-nav-btn"/>
+            <Button text="Settings" onAction="#showSettings" styleClass="user-nav-btn"/>
 
-            <Button text="💬  Forum"
-                    onAction="#showForum"
-                    maxWidth="Infinity"
-                    styleClass="sidebar-btn"/>
+            <Region HBox.hgrow="ALWAYS"/>
 
-            <Button text="✉️  Messages"
-                    onAction="#showMessages"
-                    maxWidth="Infinity"
-                    styleClass="sidebar-btn"/>
+            <HBox alignment="CENTER" spacing="10" styleClass="user-profile-chip">
+                <StackPane styleClass="user-avatar-circle">
+                    <Label text="U" styleClass="user-avatar-text"/>
+                </StackPane>
+                <Label text="Player" styleClass="user-profile-text"/>
+            </HBox>
 
-            <Separator/>
-
-            <Button text="⚙️  Settings"
-                    onAction="#showSettings"
-                    maxWidth="Infinity"
-                    styleClass="sidebar-btn"/>
-
-
-            <Button text="🚪  Logout"
+            <Button text="Logout  →"
                     onAction="#handleLogout"
-                    maxWidth="Infinity"
-                    styleClass="sidebar-btn"/>
+                    styleClass="user-logout-btn"/>
+        </HBox>
+    </top>
 
-        </VBox>
-    </left>
-
+    <!-- MAIN SCROLLABLE CONTENT -->
     <center>
-        <AnchorPane fx:id="contentArea"/>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    vbarPolicy="AS_NEEDED"
+                    pannable="true"
+                    styleClass="user-scroll">
+
+            <content>
+                <VBox spacing="24" styleClass="user-main-container">
+                    <padding>
+                        <Insets top="28" right="40" bottom="40" left="40"/>
+                    </padding>
+
+                    <!-- HERO SECTION -->
+                    <BorderPane styleClass="user-hero-card" prefHeight="340" minHeight="320">
+
+                        <left>
+                            <VBox spacing="16" alignment="CENTER_LEFT" maxWidth="520">
+                                <padding>
+                                    <Insets top="34" right="20" bottom="34" left="34"/>
+                                </padding>
+
+                                <Label text="WELCOME TO ESPORTS ARENA"
+                                       styleClass="user-hero-title"/>
+
+                                <Label text="YOUR ULTIMATE GAMING HUB"
+                                       styleClass="user-hero-subtitle"/>
+
+                                <Label text="Discover games, read pro guides, buy gaming gear, join the community, and stay connected with the esports world — all in one place."
+                                       wrapText="true"
+                                       styleClass="user-hero-description"/>
+
+                                <VBox spacing="6">
+                                    <Label text="Trending this week" styleClass="user-hero-list-title"/>
+                                    <Label text="• League of Legends" styleClass="user-hero-list-item"/>
+                                    <Label text="• Valorant" styleClass="user-hero-list-item"/>
+                                    <Label text="• Fortnite" styleClass="user-hero-list-item"/>
+                                    <Label text="• Brawlhalla" styleClass="user-hero-list-item"/>
+                                    <Label text="• Free Fire" styleClass="user-hero-list-item"/>
+                                </VBox>
+
+                                <HBox spacing="12">
+                                    <Button text="Browse Games"
+                                            onAction="#showGames"
+                                            styleClass="user-primary-btn"/>
+
+                                    <Button text="Visit Shop"
+                                            onAction="#showShop"
+                                            styleClass="user-secondary-btn"/>
+                                </HBox>
+                            </VBox>
+                        </left>
+
+                        <center>
+                            <StackPane styleClass="user-hero-visual">
+                                <Circle radius="110" styleClass="user-glow-circle"/>
+                                <Label text="🎮" styleClass="user-hero-icon"/>
+                            </StackPane>
+                        </center>
+
+                    </BorderPane>
+
+                    <!-- QUICK ACTIONS -->
+                    <HBox spacing="18">
+                        <VBox spacing="8" styleClass="user-action-card" HBox.hgrow="ALWAYS">
+                            <Label text="🎮 Games" styleClass="user-card-title"/>
+                            <Label text="Browse game categories and open available guides." wrapText="true" styleClass="user-card-text"/>
+                            <Button text="Explore"
+                                    onAction="#showGames"
+                                    styleClass="user-card-btn"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="user-action-card" HBox.hgrow="ALWAYS">
+                            <Label text="🛍 Shop" styleClass="user-card-title"/>
+                            <Label text="Find products, accessories, and gaming equipment." wrapText="true" styleClass="user-card-text"/>
+                            <Button text="Open Shop"
+                                    onAction="#showShop"
+                                    styleClass="user-card-btn"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="user-action-card" HBox.hgrow="ALWAYS">
+                            <Label text="💬 Forum" styleClass="user-card-title"/>
+                            <Label text="Join discussions and connect with the gaming community." wrapText="true" styleClass="user-card-text"/>
+                            <Button text="Join Now"
+                                    onAction="#showForum"
+                                    styleClass="user-card-btn"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="user-action-card" HBox.hgrow="ALWAYS">
+                            <Label text="✉ Messages" styleClass="user-card-title"/>
+                            <Label text="Read notifications, messages, and platform updates." wrapText="true" styleClass="user-card-text"/>
+                            <Button text="Open"
+                                    onAction="#showMessages"
+                                    styleClass="user-card-btn"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- FEATURE BLOCKS -->
+                    <HBox spacing="18">
+                        <VBox spacing="10" styleClass="user-feature-card" HBox.hgrow="ALWAYS">
+                            <Label text="Featured Events" styleClass="user-feature-title"/>
+                            <Label text="Weekly cups, ranked sessions, and special gaming events are waiting for you." wrapText="true" styleClass="user-feature-text"/>
+                            <Label text="• Friday Night Clash" styleClass="user-feature-item"/>
+                            <Label text="• Valorant Weekend Cup" styleClass="user-feature-item"/>
+                            <Label text="• Community Challenge" styleClass="user-feature-item"/>
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="user-feature-card" HBox.hgrow="ALWAYS">
+                            <Label text="Player Activity" styleClass="user-feature-title"/>
+                            <Label text="Stay active and keep exploring the platform." wrapText="true" styleClass="user-feature-text"/>
+                            <Label text="• Open your latest messages" styleClass="user-feature-item"/>
+                            <Label text="• Continue shopping" styleClass="user-feature-item"/>
+                            <Label text="• Read new community posts" styleClass="user-feature-item"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- CURRENT CONTENT -->
+                    <Label text="Current Section" styleClass="user-section-title"/>
+
+                    <VBox styleClass="user-content-card" VBox.vgrow="ALWAYS">
+                        <AnchorPane fx:id="contentArea" minHeight="420" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>
