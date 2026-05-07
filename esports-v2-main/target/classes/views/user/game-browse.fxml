@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15"
+      style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.user.GameBrowseController">
+
+    <Label text="Browse Games"
+           style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="searchField"
+                   promptText="Search games..."
+                   prefWidth="300"
+                   onKeyReleased="#handleSearch"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true"
+                prefHeight="500">
+        <content>
+            <FlowPane fx:id="gamesContainer"
+                      hgap="15"
+                      vgap="15"
+                      prefWrapLength="800"
+                      style="-fx-padding: 10;"/>
+        </content>
+    </ScrollPane>
+
+</VBox>

@@ -1,0 +1,225 @@
+/* Fenêtre discussion forum (MessageView) */
+
+.forum-msg-root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+.forum-msg-bg {
+    -fx-background-color: linear-gradient(to bottom, rgba(15, 15, 26, 0.92), rgba(26, 26, 46, 0.96));
+}
+
+.forum-msg-header {
+    -fx-background-color: rgba(67, 97, 238, 0.18);
+    -fx-background-radius: 12px;
+    -fx-border-color: rgba(67, 97, 238, 0.35);
+    -fx-border-radius: 12px;
+    -fx-border-width: 1px;
+    -fx-padding: 14px 18px;
+}
+
+.forum-msg-header-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.forum-msg-header-sub {
+    -fx-text-fill: #a8b2d1;
+    -fx-font-size: 12px;
+}
+
+.forum-msg-scroll {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+.forum-msg-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.forum-msg-list {
+    -fx-padding: 4 0 8 0;
+    -fx-spacing: 12px;
+}
+
+/* Carte message */
+.forum-msg-card {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-background-radius: 14px;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 8, 0, 0, 2);
+}
+
+.forum-msg-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.09);
+    -fx-border-color: rgba(67, 97, 238, 0.25);
+}
+
+.forum-msg-avatar {
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-background-radius: 20px;
+    -fx-background-color: linear-gradient(to bottom right, #4361ee, #7209b7);
+    -fx-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.forum-msg-text {
+    -fx-text-fill: #e8eaf0;
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+}
+
+.forum-msg-actions {
+    -fx-spacing: 6px;
+    -fx-alignment: center-right;
+}
+
+.forum-msg-btn {
+    -fx-background-radius: 8px;
+    -fx-padding: 6px 12px;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+}
+
+.forum-msg-btn-edit {
+    -fx-text-fill: #f39c12;
+    -fx-border-color: rgba(243, 156, 18, 0.5);
+    -fx-background-color: rgba(243, 156, 18, 0.12);
+}
+.forum-msg-btn-edit:hover {
+    -fx-background-color: rgba(243, 156, 18, 0.22);
+}
+
+.forum-msg-btn-del {
+    -fx-text-fill: #ff6b6b;
+    -fx-border-color: rgba(231, 76, 60, 0.45);
+    -fx-background-color: rgba(231, 76, 60, 0.1);
+}
+.forum-msg-btn-del:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.2);
+}
+
+.forum-msg-empty {
+    -fx-text-fill: #6c7393;
+    -fx-font-size: 14px;
+    -fx-padding: 24px;
+    -fx-alignment: center;
+}
+
+/* Zone de saisie */
+.forum-msg-composer {
+    -fx-background-color: rgba(22, 22, 40, 0.95);
+    -fx-background-radius: 14px;
+    -fx-border-color: rgba(67, 97, 238, 0.25);
+    -fx-border-radius: 14px;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 12, 0, 0, 4);
+}
+
+.forum-msg-composer-hint {
+    -fx-text-fill: #c5cae8;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Référence du message pendant l’édition */
+.forum-msg-edit-preview {
+    -fx-background-color: rgba(0, 0, 0, 0.35);
+    -fx-background-radius: 10px;
+    -fx-border-color: rgba(243, 156, 18, 0.45);
+    -fx-border-radius: 10px;
+    -fx-border-width: 0 0 0 4px;
+    -fx-padding: 10px 12px;
+}
+.forum-msg-edit-preview-title {
+    -fx-text-fill: #f39c12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.forum-msg-edit-original {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-wrap-text: true;
+}
+
+.text-area.forum-msg-input {
+    -fx-background-color: rgba(38, 38, 62, 1);
+    -fx-control-inner-background: rgba(38, 38, 62, 1);
+    -fx-background-radius: 10px;
+    -fx-border-color: rgba(255, 255, 255, 0.18);
+    -fx-border-radius: 10px;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #9096b8;
+    -fx-font-size: 14px;
+    -fx-display-caret: true;
+    -fx-highlight-fill: rgba(67, 97, 238, 0.75);
+    -fx-highlight-text-fill: #ffffff;
+}
+.text-area.forum-msg-input .content {
+    -fx-background-color: rgba(38, 38, 62, 1);
+}
+/* Texte tapé dans le TextArea (Modena n’applique pas toujours -fx-text-fill au nœud interne) */
+.text-area.forum-msg-input .text {
+    -fx-fill: #ffffff;
+}
+.text-area.forum-msg-input:focused {
+    -fx-border-color: #6b84f5;
+    -fx-background-color: rgba(48, 48, 78, 1);
+    -fx-control-inner-background: rgba(48, 48, 78, 1);
+}
+.text-area.forum-msg-input:focused .content {
+    -fx-background-color: rgba(48, 48, 78, 1);
+}
+.text-area.forum-msg-input:focused .text {
+    -fx-fill: #ffffff;
+}
+
+.forum-msg-send {
+    -fx-background-color: linear-gradient(to bottom, #5a75f0, #4361ee);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+.forum-msg-send:hover {
+    -fx-background-color: linear-gradient(to bottom, #6b84f5, #3451d1);
+}
+
+.forum-msg-cancel {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #c5c9e0;
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 16px;
+    -fx-cursor: hand;
+}
+.forum-msg-cancel:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.14);
+}
+
+.forum-msg-error-label {
+    -fx-text-fill: #ff5a5f;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: -2 0 0 2;
+}
+
+.text-area.input-error,
+.text-input.input-error {
+    -fx-border-color: transparent transparent #e74c3c transparent;
+    -fx-border-width: 0 0 2px 0;
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" style="-fx-padding: 25;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.GuideStepFormController">
+
+    <Label fx:id="formTitle" text="Add Step"
+           style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="12">
+        <Label text="Guide:"       GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="guideBox" prefWidth="300"
+                  GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Title:"       GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="titleField" promptText="Step title" prefWidth="300"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Content:"     GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextArea fx:id="contentField" promptText="Step content" prefWidth="300" prefHeight="100"
+                  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Step Order:"  GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="orderField" promptText="1" prefWidth="300"
+                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Image:"       GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <HBox spacing="8" GridPane.rowIndex="4" GridPane.columnIndex="1">
+            <TextField fx:id="imageField" promptText="image.jpg" prefWidth="230"/>
+            <Button text="Browse..." onAction="#handleBrowse"/>
+        </HBox>
+
+        <Label text="Video URL:"   GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <HBox spacing="8" GridPane.rowIndex="5" GridPane.columnIndex="1">
+            <TextField fx:id="videoField" promptText="https://youtube.com/..." prefWidth="220"/>
+            <Button text="Fetch from YouTube" onAction="#handleFetchYoutube"
+                    style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+        </HBox>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button text="Save"   onAction="#handleSave"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+        <Button text="Delete" fx:id="deleteBtn" onAction="#handleDelete"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+
+</VBox>

@@ -1,0 +1,32 @@
+==================================================
+       ESPORTS TOURNAMENT MASTER REPORT          
+       Generated on: 2026-04-30T12:44:18.180554
+==================================================
+
+TOURNAMENT: THE WAR BEGINS
+--------------------------------------------------
+ > GAME:      Call Of Duty
+ > STATUS:    open
+ > START:     2026-05-01 00:00:00
+ > PRIZE:     3000 TND TND
+ > CAPACITY:  8 Teams Max
+
+TOURNAMENT: ONLY FOR PROS
+--------------------------------------------------
+ > GAME:      Valorant
+ > STATUS:    open
+ > START:     2026-05-03 00:00:00
+ > PRIZE:     2000 TND TND
+ > CAPACITY:  16 Teams Max
+
+TOURNAMENT: TRY YOUR LUCK!!
+--------------------------------------------------
+ > GAME:      League of Legends
+ > STATUS:    in_progress
+ > START:     2026-05-02 00:00:00
+ > PRIZE:     5000$ TND
+ > CAPACITY:  16 Teams Max
+
+==================================================
+             END OF OFFICIAL REPORT               
+==================================================

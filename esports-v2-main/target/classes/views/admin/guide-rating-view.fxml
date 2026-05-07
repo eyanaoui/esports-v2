@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.GuideRatingController">
+
+    <Label text="Guide Rating Management" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Search ratings..." prefWidth="300"
+                   onKeyReleased="#handleSearch"/>
+        <Button text="+ Add Rating" onAction="#handleAdd"/>
+    </HBox>
+
+    <TableView fx:id="ratingTable" prefHeight="450">
+        <columns>
+            <TableColumn fx:id="colId"       text="ID"         prefWidth="50"/>
+            <TableColumn fx:id="colGuideId"  text="Guide ID"   prefWidth="80"/>
+            <TableColumn fx:id="colUserId"   text="User ID"    prefWidth="80"/>
+            <TableColumn fx:id="colRating"   text="Rating"     prefWidth="80"/>
+            <TableColumn fx:id="colComment"  text="Comment"    prefWidth="300"/>
+            <TableColumn fx:id="colDate"     text="Date"       prefWidth="150"/>
+        </columns>
+    </TableView>
+
+</VBox>

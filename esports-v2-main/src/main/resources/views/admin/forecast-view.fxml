@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="18"
+      style="-fx-padding: 26; -fx-background-color: #f5f7fb;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.ForecastController">
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <VBox spacing="4">
+            <Label text="🤖 ML Sales Forecasts"
+                   style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+
+            <Label text="Predicted product sales for the next period using the Python ML model."
+                   style="-fx-text-fill: #6b7280; -fx-font-size: 13;"/>
+        </VBox>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <TextField fx:id="searchField"
+                   promptText="Search product or category..."
+                   prefWidth="280"
+                   style="-fx-background-radius: 12; -fx-padding: 10;"/>
+
+        <Button text="Search"
+                onAction="#handleSearch"
+                style="-fx-background-color: #635bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-padding: 10 16;"/>
+
+        <Button text="Refresh"
+                onAction="#handleRefresh"
+                style="-fx-background-color: white; -fx-border-color: #d1d5db; -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 10 16;"/>
+    </HBox>
+
+    <GridPane hgap="16" vgap="16">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+            <ColumnConstraints percentWidth="25"/>
+        </columnConstraints>
+
+        <VBox spacing="6"
+              GridPane.columnIndex="0"
+              style="-fx-background-color: linear-gradient(to right, #2563eb, #4f46e5); -fx-background-radius: 18; -fx-padding: 18;">
+            <Label text="Forecasted Products"
+                   style="-fx-text-fill: #dbeafe; -fx-font-size: 13;"/>
+            <Label fx:id="totalForecastsLabel"
+                   text="0"
+                   style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <VBox spacing="6"
+              GridPane.columnIndex="1"
+              style="-fx-background-color: linear-gradient(to right, #16a34a, #059669); -fx-background-radius: 18; -fx-padding: 18;">
+            <Label text="Predicted Sales Qty"
+                   style="-fx-text-fill: #dcfce7; -fx-font-size: 13;"/>
+            <Label fx:id="totalPredictedLabel"
+                   text="0"
+                   style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <VBox spacing="6"
+              GridPane.columnIndex="2"
+              style="-fx-background-color: linear-gradient(to right, #f97316, #ea580c); -fx-background-radius: 18; -fx-padding: 18;">
+            <Label text="Products Need Restock"
+                   style="-fx-text-fill: #ffedd5; -fx-font-size: 13;"/>
+            <Label fx:id="restockNeededLabel"
+                   text="0"
+                   style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <VBox spacing="6"
+              GridPane.columnIndex="3"
+              style="-fx-background-color: linear-gradient(to right, #dc2626, #be123c); -fx-background-radius: 18; -fx-padding: 18;">
+            <Label text="Recommended Reorder Qty"
+                   style="-fx-text-fill: #fee2e2; -fx-font-size: 13;"/>
+            <Label fx:id="reorderQtyLabel"
+                   text="0"
+                   style="-fx-text-fill: white; -fx-font-size: 28; -fx-font-weight: bold;"/>
+        </VBox>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button text="Show Restock Needed"
+                onAction="#handleShowRestockNeeded"
+                style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-padding: 10 16;"/>
+
+        <Button text="Sort by Predicted Qty"
+                onAction="#handleSortByPredictedQty"
+                style="-fx-background-color: #1f2937; -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 10 16;"/>
+
+        <Button text="Sort by Reorder Qty"
+                onAction="#handleSortByReorderQty"
+                style="-fx-background-color: #1f2937; -fx-text-fill: white; -fx-background-radius: 12; -fx-padding: 10 16;"/>
+    </HBox>
+
+    <TableView fx:id="forecastTable"
+               prefHeight="450"
+               style="-fx-background-radius: 14; -fx-border-radius: 14;">
+        <columns>
+            <TableColumn fx:id="productIdColumn" text="Product ID" prefWidth="90"/>
+            <TableColumn fx:id="productNameColumn" text="Product" prefWidth="180"/>
+            <TableColumn fx:id="categoryColumn" text="Category" prefWidth="130"/>
+            <TableColumn fx:id="stockColumn" text="Stock" prefWidth="90"/>
+            <TableColumn fx:id="forecastDaysColumn" text="Days" prefWidth="80"/>
+            <TableColumn fx:id="predictedQtyColumn" text="Predicted Qty" prefWidth="130"/>
+            <TableColumn fx:id="reorderQtyColumn" text="Reorder Qty" prefWidth="130"/>
+            <TableColumn fx:id="riskColumn" text="Risk Level" prefWidth="160"/>
+            <TableColumn fx:id="generatedAtColumn" text="Generated At" prefWidth="180"/>
+        </columns>
+    </TableView>
+
+</VBox>

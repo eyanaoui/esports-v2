@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esports.controllers.user.UserDashboardController"
+            prefWidth="1100"
+            prefHeight="650">
+
+    <left>
+        <VBox styleClass="sidebar" prefWidth="220" spacing="8">
+
+            <Label text="🎮 Esports User" styleClass="sidebar-title"/>
+
+            <Button text="🎮  Games"
+                    onAction="#showGames"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-btn"/>
+
+
+            <Button text="🛍️  Shop"
+                    onAction="#showShop"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-btn"/>
+
+            <Button text="🛒  Checkout"
+                    onAction="#showCheckout"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-btn"/>
+
+            <Button text="💬  Forum"
+                    onAction="#showForum"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-btn"/>
+
+            <Button text="✉️  Messages"
+                    onAction="#showMessages"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-btn"/>
+
+            <Separator/>
+
+            <Button text="⚙️  Settings"
+                    onAction="#showSettings"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-btn"/>
+
+
+            <Button text="🚪  Logout"
+                    onAction="#handleLogout"
+                    maxWidth="Infinity"
+                    styleClass="sidebar-btn"/>
+
+        </VBox>
+    </left>
+
+    <center>
+        <AnchorPane fx:id="contentArea"/>
+    </center>
+
+</BorderPane>

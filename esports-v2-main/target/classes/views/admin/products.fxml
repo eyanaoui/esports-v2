@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esports.controllers.admin.ProductsController"
+            prefWidth="1280"
+            prefHeight="760"
+            style="-fx-background-color: linear-gradient(to bottom right, #070914, #111827, #171b34);">
+
+    <top>
+        <VBox spacing="16" style="-fx-padding: 24 28 18 28;">
+
+            <HBox spacing="18"
+                  alignment="CENTER_LEFT"
+                  style="-fx-background-color: linear-gradient(to right, #15172f, #25105c, #0f172a);
+                         -fx-background-radius: 24;
+                         -fx-padding: 24;
+                         -fx-border-color: rgba(147, 51, 234, 0.50);
+                         -fx-border-radius: 24;
+                         -fx-effect: dropshadow(gaussian, rgba(99,91,255,0.32), 26, 0, 0, 8);">
+
+                <VBox spacing="6">
+                    <Label text="🛍️ Esports Product Command Center"
+                           style="-fx-font-size: 31;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: white;"/>
+
+                    <Label text="  "
+                           style="-fx-text-fill: #c7d2fe;
+                                  -fx-font-size: 13;"/>
+
+                    <HBox spacing="10">
+                        <Label text="LIVE STOCK"
+                               style="-fx-background-color: rgba(34,197,94,0.18);
+                                      -fx-text-fill: #86efac;
+                                      -fx-padding: 6 12;
+                                      -fx-background-radius: 999;
+                                      -fx-font-size: 11;
+                                      -fx-font-weight: bold;"/>
+
+                        <Label text="SALES FORECAST"
+                               style="-fx-background-color: rgba(99,102,241,0.22);
+                                      -fx-text-fill: #c7d2fe;
+                                      -fx-padding: 6 12;
+                                      -fx-background-radius: 999;
+                                      -fx-font-size: 11;
+                                      -fx-font-weight: bold;"/>
+
+                        <Label text="EXCEL EXPORT"
+                               style="-fx-background-color: rgba(34,197,94,0.18);
+                                      -fx-text-fill: #86efac;
+                                      -fx-padding: 6 12;
+                                      -fx-background-radius: 999;
+                                      -fx-font-size: 11;
+                                      -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <VBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button fx:id="runForecastButton"
+                            text="📈 Update Forecast"
+                            onAction="#handleRunMlModels"
+                            style="-fx-background-color: linear-gradient(to right, #8b5cf6, #6366f1);
+                                   -fx-text-fill: white;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 14;
+                                   -fx-padding: 12 20;
+                                   -fx-font-size: 14;
+                                   -fx-cursor: hand;"/>
+
+                    <Button text="📊 Export Excel"
+                            onAction="#handleExportExcel"
+                            style="-fx-background-color: linear-gradient(to right, #22c55e, #16a34a);
+                                   -fx-text-fill: white;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 14;
+                                   -fx-padding: 12 20;
+                                   -fx-font-size: 14;
+                                   -fx-cursor: hand;"/>
+
+                    <Button text="+ Add Product"
+                            onAction="#handleAddProduct"
+                            style="-fx-background-color: linear-gradient(to right, #f59e0b, #f97316);
+                                   -fx-text-fill: white;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 14;
+                                   -fx-padding: 12 20;
+                                   -fx-font-size: 14;
+                                   -fx-cursor: hand;"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="12"
+                  alignment="CENTER_LEFT"
+                  style="-fx-background-color: rgba(255,255,255,0.06);
+                         -fx-background-radius: 18;
+                         -fx-padding: 14;
+                         -fx-border-color: rgba(255,255,255,0.08);
+                         -fx-border-radius: 18;">
+
+                <TextField fx:id="searchField"
+                           promptText="Search product, category, stock, risk..."
+                           prefWidth="340"
+                           style="-fx-background-color: #0f172a;
+                                  -fx-text-fill: white;
+                                  -fx-prompt-text-fill: #8b8fae;
+                                  -fx-background-radius: 14;
+                                  -fx-border-color: #2b315d;
+                                  -fx-border-radius: 14;
+                                  -fx-padding: 11;"/>
+
+                <Button text="Search"
+                        onAction="#handleSearch"
+                        style="-fx-background-color: linear-gradient(to right, #8b5cf6, #6366f1);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 14;
+                               -fx-padding: 10 18;"/>
+
+                <Button text="Refresh"
+                        onAction="#handleRefresh"
+                        style="-fx-background-color: transparent;
+                               -fx-border-color: #475569;
+                               -fx-text-fill: #e5e7eb;
+                               -fx-background-radius: 14;
+                               -fx-border-radius: 14;
+                               -fx-padding: 10 18;"/>
+
+                <Button text="Export Current View"
+                        onAction="#handleExportExcel"
+                        style="-fx-background-color: rgba(34,197,94,0.18);
+                               -fx-border-color: rgba(34,197,94,0.35);
+                               -fx-text-fill: #86efac;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 14;
+                               -fx-border-radius: 14;
+                               -fx-padding: 10 18;"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label fx:id="messageLabel"
+                       text=""
+                       wrapText="true"
+                       style="-fx-text-fill: #86efac; -fx-font-weight: bold; -fx-font-size: 12;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background: transparent;
+                           -fx-background-color: transparent;">
+            <content>
+                <VBox spacing="20" style="-fx-padding: 0 28 28 28;">
+
+                    <GridPane hgap="16" vgap="16">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="20"/>
+                            <ColumnConstraints percentWidth="20"/>
+                            <ColumnConstraints percentWidth="20"/>
+                            <ColumnConstraints percentWidth="20"/>
+                            <ColumnConstraints percentWidth="20"/>
+                        </columnConstraints>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="0"
+                              style="-fx-background-color: linear-gradient(to right, #2563eb, #4f46e5);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Products" style="-fx-text-fill: #dbeafe; -fx-font-size: 13;"/>
+                            <Label fx:id="totalProductsLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="1"
+                              style="-fx-background-color: linear-gradient(to right, #16a34a, #059669);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Stock" style="-fx-text-fill: #dcfce7; -fx-font-size: 13;"/>
+                            <Label fx:id="totalStockLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="2"
+                              style="-fx-background-color: linear-gradient(to right, #f97316, #ea580c);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Orders" style="-fx-text-fill: #ffedd5; -fx-font-size: 13;"/>
+                            <Label fx:id="totalOrdersLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="3"
+                              style="-fx-background-color: linear-gradient(to right, #dc2626, #be123c);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Avg Price" style="-fx-text-fill: #fee2e2; -fx-font-size: 13;"/>
+                            <Label fx:id="averagePriceLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="4"
+                              style="-fx-background-color: linear-gradient(to right, #be123c, #e11d48);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Need Restock" style="-fx-text-fill: #ffe4e6; -fx-font-size: 13;"/>
+                            <Label fx:id="restockLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+                    </GridPane>
+
+                    <VBox spacing="14"
+                          style="-fx-background-color: rgba(255,255,255,0.06);
+                                 -fx-background-radius: 24;
+                                 -fx-padding: 20;
+                                 -fx-border-color: rgba(255,255,255,0.09);
+                                 -fx-border-radius: 24;">
+
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <VBox spacing="3">
+                                <Label text="Product Inventory + Stock Intelligence"
+                                       style="-fx-font-size: 22;
+                                              -fx-font-weight: bold;
+                                              -fx-text-fill: white;"/>
+
+                                <Label text="Use Export Excel to generate a professional .xlsx report from the current table view."
+                                       style="-fx-text-fill: #94a3b8; -fx-font-size: 13;"/>
+                            </VBox>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <Button text="Reorder ↓"
+                                    onAction="#handleSortByReorderQty"
+                                    style="-fx-background-color: #be123c;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 15;"/>
+
+                            <Button text="Modify Selected"
+                                    onAction="#handleEditSelected"
+                                    style="-fx-background-color: #f59e0b;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 15;"/>
+
+                            <Button text="Deactivate Selected"
+                                    onAction="#handleDeleteSelected"
+                                    style="-fx-background-color: #ef4444;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 15;"/>
+                        </HBox>
+
+                        <TableView fx:id="productTable"
+                                   prefHeight="390"
+                                   style="-fx-background-color: #0f172a;
+                                          -fx-background-radius: 18;
+                                          -fx-border-color: #2b315d;
+                                          -fx-border-radius: 18;">
+                            <columns>
+                                <TableColumn fx:id="idColumn" text="ID" prefWidth="55"/>
+                                <TableColumn fx:id="nameColumn" text="Name" prefWidth="140"/>
+                                <TableColumn fx:id="categoryColumn" text="Category" prefWidth="125"/>
+                                <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="220"/>
+                                <TableColumn fx:id="priceColumn" text="Price" prefWidth="115"/>
+                                <TableColumn fx:id="stockColumn" text="Stock" prefWidth="80"/>
+                                <TableColumn fx:id="ordersCountColumn" text="Orders" prefWidth="85"/>
+                                <TableColumn fx:id="forecastDaysColumn" text="Period" prefWidth="80"/>
+                                <TableColumn fx:id="reorderQtyColumn" text="Reorder" prefWidth="95"/>
+                                <TableColumn fx:id="riskColumn" text="Stock Status" prefWidth="120"/>
+                                <TableColumn fx:id="imageColumn" text="Image" prefWidth="180"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <VBox spacing="14"
+                          style="-fx-background-color: rgba(139,92,246,0.08);
+                                 -fx-background-radius: 24;
+                                 -fx-padding: 20;
+                                 -fx-border-color: rgba(139,92,246,0.22);
+                                 -fx-border-radius: 24;">
+
+                        <HBox alignment="CENTER_LEFT">
+                            <VBox spacing="3">
+                                <Label text="Sort &amp; Analytics"
+                                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+                                <Label text="Visualize product popularity and category distribution."
+                                       style="-fx-text-fill: #c4b5fd; -fx-font-size: 13;"/>
+                            </VBox>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <Button text="Name A-Z" onAction="#handleSortByName"
+                                    style="-fx-background-color: #1f2937; -fx-text-fill: white; -fx-background-radius: 12;"/>
+                            <Button text="Price ↑" onAction="#handleSortByPriceAsc"
+                                    style="-fx-background-color: #1f2937; -fx-text-fill: white; -fx-background-radius: 12;"/>
+                            <Button text="Price ↓" onAction="#handleSortByPriceDesc"
+                                    style="-fx-background-color: #1f2937; -fx-text-fill: white; -fx-background-radius: 12;"/>
+                            <Button text="Stock ↑" onAction="#handleSortByStockAsc"
+                                    style="-fx-background-color: #1f2937; -fx-text-fill: white; -fx-background-radius: 12;"/>
+                            <Button text="Stock ↓" onAction="#handleSortByStockDesc"
+                                    style="-fx-background-color: #1f2937; -fx-text-fill: white; -fx-background-radius: 12;"/>
+                            <Button text="Most Ordered" onAction="#handleSortByOrders"
+                                    style="-fx-background-color: #635bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12;"/>
+                        </HBox>
+
+                        <HBox spacing="20">
+                            <BarChart fx:id="ordersBarChart"
+                                      prefWidth="720"
+                                      prefHeight="330"
+                                      title="Most Ordered Products">
+                                <xAxis>
+                                    <CategoryAxis label="Product"/>
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Orders"/>
+                                </yAxis>
+                            </BarChart>
+
+                            <PieChart fx:id="categoryPieChart"
+                                      prefWidth="420"
+                                      prefHeight="330"
+                                      title="Category Distribution"/>
+                        </HBox>
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

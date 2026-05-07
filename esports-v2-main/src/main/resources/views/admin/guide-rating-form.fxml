@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" style="-fx-padding: 25;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.GuideRatingFormController">
+
+    <Label fx:id="formTitle" text="Add Rating"
+           style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="12">
+        <Label text="Guide:"        GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="guideBox" prefWidth="300"
+                  GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Rating (1-5):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="ratingBox" prefWidth="300"
+                  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Comment:"      GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextArea fx:id="commentField" promptText="Write a comment..." prefWidth="300" prefHeight="100"
+                  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button text="Save"   onAction="#handleSave"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+        <Button text="Delete" fx:id="deleteBtn" onAction="#handleDelete"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+
+</VBox>

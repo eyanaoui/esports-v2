@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esports.controllers.admin.ProductReviewsAdminController"
+            prefWidth="1280"
+            prefHeight="760"
+            style="-fx-background-color: linear-gradient(to bottom right, #070914, #111827, #171b34);">
+
+    <top>
+        <VBox spacing="16" style="-fx-padding: 24 28 18 28;">
+
+            <HBox spacing="18"
+                  alignment="CENTER_LEFT"
+                  style="-fx-background-color: linear-gradient(to right, #15172f, #25105c, #0f172a);
+                         -fx-background-radius: 24;
+                         -fx-padding: 24;
+                         -fx-border-color: rgba(147, 51, 234, 0.50);
+                         -fx-border-radius: 24;
+                         -fx-effect: dropshadow(gaussian, rgba(99,91,255,0.32), 26, 0, 0, 8);">
+
+                <VBox spacing="6">
+                    <Label text="🛡️ Review Moderation API"
+                           style="-fx-font-size: 31;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: white;"/>
+
+                    <Label text="Moderate customer product reviews coming from the Review REST API."
+                           style="-fx-text-fill: #c7d2fe;
+                                  -fx-font-size: 13;"/>
+
+                    <HBox spacing="10">
+                        <Label text="FASTAPI"
+                               style="-fx-background-color: rgba(99,102,241,0.22);
+                                      -fx-text-fill: #c7d2fe;
+                                      -fx-padding: 6 12;
+                                      -fx-background-radius: 999;
+                                      -fx-font-size: 11;
+                                      -fx-font-weight: bold;"/>
+
+                        <Label text="MYSQL"
+                               style="-fx-background-color: rgba(34,197,94,0.18);
+                                      -fx-text-fill: #86efac;
+                                      -fx-padding: 6 12;
+                                      -fx-background-radius: 999;
+                                      -fx-font-size: 11;
+                                      -fx-font-weight: bold;"/>
+
+                        <Label text="MODERATION"
+                               style="-fx-background-color: rgba(239,68,68,0.18);
+                                      -fx-text-fill: #fca5a5;
+                                      -fx-padding: 6 12;
+                                      -fx-background-radius: 999;
+                                      -fx-font-size: 11;
+                                      -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button text="Refresh API Data"
+                        onAction="#handleRefresh"
+                        style="-fx-background-color: linear-gradient(to right, #8b5cf6, #6366f1);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 14;
+                               -fx-padding: 12 20;
+                               -fx-font-size: 14;
+                               -fx-cursor: hand;"/>
+            </HBox>
+
+            <HBox spacing="12"
+                  alignment="CENTER_LEFT"
+                  style="-fx-background-color: rgba(255,255,255,0.06);
+                         -fx-background-radius: 18;
+                         -fx-padding: 14;
+                         -fx-border-color: rgba(255,255,255,0.08);
+                         -fx-border-radius: 18;">
+
+                <TextField fx:id="searchField"
+                           promptText="Search product, customer, comment, status..."
+                           prefWidth="380"
+                           style="-fx-background-color: #0f172a;
+                                  -fx-text-fill: white;
+                                  -fx-prompt-text-fill: #8b8fae;
+                                  -fx-background-radius: 14;
+                                  -fx-border-color: #2b315d;
+                                  -fx-border-radius: 14;
+                                  -fx-padding: 11;"/>
+
+                <Button text="Search"
+                        onAction="#handleSearch"
+                        style="-fx-background-color: linear-gradient(to right, #8b5cf6, #6366f1);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 14;
+                               -fx-padding: 10 18;"/>
+
+                <Button text="Refresh"
+                        onAction="#handleRefresh"
+                        style="-fx-background-color: transparent;
+                               -fx-border-color: #475569;
+                               -fx-text-fill: #e5e7eb;
+                               -fx-background-radius: 14;
+                               -fx-border-radius: 14;
+                               -fx-padding: 10 18;"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label fx:id="messageLabel"
+                       text=""
+                       wrapText="true"
+                       style="-fx-text-fill: #86efac; -fx-font-weight: bold; -fx-font-size: 12;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    style="-fx-background: transparent;
+                           -fx-background-color: transparent;">
+            <content>
+                <VBox spacing="20" style="-fx-padding: 0 28 28 28;">
+
+                    <GridPane hgap="16" vgap="16">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                        </columnConstraints>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="0"
+                              style="-fx-background-color: linear-gradient(to right, #2563eb, #4f46e5);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Total Reviews" style="-fx-text-fill: #dbeafe; -fx-font-size: 13;"/>
+                            <Label fx:id="totalReviewsLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="1"
+                              style="-fx-background-color: linear-gradient(to right, #16a34a, #059669);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Visible" style="-fx-text-fill: #dcfce7; -fx-font-size: 13;"/>
+                            <Label fx:id="visibleReviewsLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="2"
+                              style="-fx-background-color: linear-gradient(to right, #dc2626, #be123c);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Hidden" style="-fx-text-fill: #fee2e2; -fx-font-size: 13;"/>
+                            <Label fx:id="hiddenReviewsLabel" text="0"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+
+                        <VBox spacing="6"
+                              GridPane.columnIndex="3"
+                              style="-fx-background-color: linear-gradient(to right, #f59e0b, #d97706);
+                                     -fx-background-radius: 20;
+                                     -fx-padding: 18;">
+                            <Label text="Average Rating" style="-fx-text-fill: #ffedd5; -fx-font-size: 13;"/>
+                            <Label fx:id="averageRatingLabel" text="0 / 5"
+                                   style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;"/>
+                        </VBox>
+                    </GridPane>
+
+                    <VBox spacing="14"
+                          style="-fx-background-color: rgba(255,255,255,0.06);
+                                 -fx-background-radius: 24;
+                                 -fx-padding: 20;
+                                 -fx-border-color: rgba(255,255,255,0.09);
+                                 -fx-border-radius: 24;">
+
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <VBox spacing="3">
+                                <Label text="Customer Review Moderation"
+                                       style="-fx-font-size: 22;
+                                              -fx-font-weight: bold;
+                                              -fx-text-fill: white;"/>
+
+                                <Label text="Hide inappropriate comments or permanently delete them."
+                                       style="-fx-text-fill: #94a3b8; -fx-font-size: 13;"/>
+                            </VBox>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <Button text="Show Selected"
+                                    onAction="#handleShowSelected"
+                                    style="-fx-background-color: #22c55e;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 15;"/>
+
+                            <Button text="Hide Inappropriate"
+                                    onAction="#handleHideSelected"
+                                    style="-fx-background-color: #f59e0b;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 15;"/>
+
+                            <Button text="Delete Review"
+                                    onAction="#handleDeleteSelected"
+                                    style="-fx-background-color: #ef4444;
+                                           -fx-text-fill: white;
+                                           -fx-font-weight: bold;
+                                           -fx-background-radius: 12;
+                                           -fx-padding: 10 15;"/>
+                        </HBox>
+
+                        <TableView fx:id="reviewsTable"
+                                   prefHeight="500"
+                                   style="-fx-background-color: #0f172a;
+                                          -fx-background-radius: 18;
+                                          -fx-border-color: #2b315d;
+                                          -fx-border-radius: 18;">
+                            <columns>
+                                <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+                                <TableColumn fx:id="productColumn" text="Product" prefWidth="160"/>
+                                <TableColumn fx:id="customerColumn" text="Customer" prefWidth="135"/>
+                                <TableColumn fx:id="ratingColumn" text="Rating" prefWidth="80"/>
+                                <TableColumn fx:id="starsColumn" text="Stars" prefWidth="120"/>
+                                <TableColumn fx:id="commentColumn" text="Comment" prefWidth="330"/>
+                                <TableColumn fx:id="statusColumn" text="Status" prefWidth="110"/>
+                                <TableColumn fx:id="createdAtColumn" text="Created At" prefWidth="155"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

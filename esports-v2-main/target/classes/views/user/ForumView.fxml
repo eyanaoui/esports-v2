@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esports.controllers.user.ForumController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true">
+            <image>
+                <Image url="@../../images/halo-infinite.jpg" />
+            </image>
+        </ImageView>
+        <VBox spacing="15.0" style="-fx-padding: 30; -fx-background-color: rgba(26, 26, 46, 0.85);">
+            <children>
+                <Label text="COMMUNITY FORUM" textFill="WHITE">
+                    <font><Font name="System Bold" size="28.0" /></font>
+                </Label>
+                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                    <Button text="🔔 Notifications" onAction="#handleShowNotifications" style="-fx-background-color: #34495e; -fx-text-fill: white;" />
+                    <Label text="Unread:" textFill="WHITE"/>
+                    <Label fx:id="notifCountLabel" text="0" textFill="#f1c40f"/>
+                </HBox>
+                <TextField fx:id="searchField" onKeyReleased="#handleSearch" promptText="Search topics..." style="-fx-background-radius: 15;" />
+                <VBox spacing="10.0" style="-fx-background-color: rgba(255,255,255,0.05); -fx-padding: 15; -fx-background-radius: 10;">
+                    <children>
+                        <TextField fx:id="titreField" promptText="Titre (3–200 car., lettre requise, pas de chiffre en tête)" />
+                        <Label fx:id="titreErrorLabel" styleClass="form-error-label" visible="false" managed="false"/>
+                        <TextArea fx:id="contenuArea" prefHeight="80.0" promptText="Contenu (5–5000 car., au moins une lettre, pas de chiffre en tête)" wrapText="true" />
+                        <Label fx:id="contenuErrorLabel" styleClass="form-error-label" visible="false" managed="false"/>
+                        <HBox spacing="8.0">
+                            <TextField fx:id="imageField" HBox.hgrow="ALWAYS" promptText="Image (filename.jpg)" />
+                            <Button onAction="#handleBrowseImage" style="-fx-background-color: #5dade2; -fx-text-fill: white;" text="Browse" />
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <Button fx:id="saveTopicButton" onAction="#handleSaveTopic" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" text="Save topic" />
+                            <Button onAction="#handleClearForm" style="-fx-background-color: #95a5a6; -fx-text-fill: white;" text="Clear" />
+                        </HBox>
+                    </children>
+                </VBox>
+                <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
+                    <content>
+                        <VBox fx:id="forumContainer" spacing="10.0" />
+                    </content>
+                </ScrollPane>
+                <VBox spacing="6.0" style="-fx-background-color: rgba(255,255,255,0.05); -fx-padding: 10; -fx-background-radius: 10;">
+                    <Label text="Recent Forum Activity" textFill="WHITE"/>
+                    <ListView fx:id="activityListView" prefHeight="110.0"/>
+                </VBox>
+                <VBox spacing="6.0" style="-fx-background-color: rgba(255,255,255,0.05); -fx-padding: 10; -fx-background-radius: 10;">
+                    <Label text="Mes sujets favoris" textFill="WHITE"/>
+                    <ListView fx:id="favoritesListView" prefHeight="100.0"/>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

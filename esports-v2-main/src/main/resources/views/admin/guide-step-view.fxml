@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.esports.controllers.admin.GuideStepController">
+
+    <Label text="Guide Step Management" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Search steps..." prefWidth="300"
+                   onKeyReleased="#handleSearch"/>
+        <Button text="+ Add Step" onAction="#handleAdd"/>
+    </HBox>
+
+    <TableView fx:id="stepTable" prefHeight="450">
+        <columns>
+            <TableColumn fx:id="colId"       text="ID"          prefWidth="50"/>
+            <TableColumn fx:id="colGuideId"  text="Guide ID"    prefWidth="80"/>
+            <TableColumn fx:id="colTitle"    text="Title"       prefWidth="200"/>
+            <TableColumn fx:id="colContent"  text="Content"     prefWidth="250"/>
+            <TableColumn fx:id="colOrder"    text="Order"       prefWidth="60"/>
+            <TableColumn fx:id="colVideo"    text="Video URL"   prefWidth="150"/>
+        </columns>
+    </TableView>
+
+</VBox>
